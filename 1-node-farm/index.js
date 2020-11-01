@@ -1,6 +1,8 @@
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
+const slugify = require("slugify");
+const replaceTemplate = require("./modules/replaceTemplate");
 
 // blocking, sync way
 // const text = fs.readFileSync("./txt/names.txt", "utf-8");
@@ -20,18 +22,6 @@ const url = require("url");
 // fs.readFile("./txt/read-this.txt", "utf-8", (error, data) => {
 //   console.log(data);
 // })
-
-const replaceTemplate = (template, data) => {
-  return template.replace(/{%PRODUCTNAME%}/g, data.productName)
-    .replace(/{%IMAGE%}/g, data.image)
-    .replace(/{%QUANTITY%}/g, data.quantity)
-    .replace(/{%PRICE%}/g, data.price)
-    .replace(/{%ID%}/g, data.id)
-    .replace(/{%NUTRIENTS%}/g, data.nutrients)
-    .replace(/{%DESCRIPTION%}/g, data.description)
-    .replace(/{%FROM%}/g, data.from)
-    .replace(/{%NOT_ORGANIC%}/g, data.organic ? "not-organic" : "")
-}
 
 const data = fs.readFileSync(`${__dirname}/starter/dev-data/data.json`, "utf-8");
 const parsedData = JSON.parse(data);
